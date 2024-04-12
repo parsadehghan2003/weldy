@@ -15,3 +15,4 @@ dependencyResolutionManagement {
 
 rootProject.name = "weldy"
 include(":app")
+include(":base")
