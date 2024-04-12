@@ -16,6 +16,9 @@ dependencyResolutionManagement {
 rootProject.name = "weldy"
 include(":app")
 include(":base")
+//database
+include(":database")
+//cat feature
 include(":cat")
 include(":cat:domain")
 include(":cat:data-source")

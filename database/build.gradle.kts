@@ -1,12 +1,13 @@
 plugins {
     id("com.android.library")
     id("org.jetbrains.kotlin.android")
+    id("io.realm.kotlin")
     id("kotlin-kapt")
     id("com.google.dagger.hilt.android")
 }
 
 android {
-    namespace = "com.ftpd.cat.ui"
+    namespace = "com.ftpd.database"
     compileSdk = Android.compileSdk
 
     defaultConfig {
@@ -40,6 +41,8 @@ dependencies {
     implementation(AndroidX.appCompat)
     implementation(Google.material)
     testImplementation(JUnit.jUnit)
+    implementation("io.realm.kotlin:library-base:1.11.0")
+
     androidTestImplementation(AndroidXTest.jUnitInstrumentTest)
     androidTestImplementation(AndroidXTest.espresso)
     implementation(Hilt.android)
