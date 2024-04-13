@@ -6,6 +6,6 @@ interface BaseDomain {
 
 enum class ActionType {
     ERROR,
-    GET_POSTS_RESPONSE,
-    GET_POSTS_REQUEST
+    GET_CATS_RESPONSE,
+    GET_CATS_REQUEST
 }

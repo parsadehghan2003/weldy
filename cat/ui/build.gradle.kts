@@ -44,4 +44,5 @@ dependencies {
     androidTestImplementation(AndroidXTest.espresso)
     implementation(Hilt.android)
     kapt(Hilt.compiler)
+    implementation(project(":base"))
 }

@@ -18,6 +18,8 @@ include(":app")
 include(":base")
 //database
 include(":database")
+//gateway
+include(":gateway")
 //cat feature
 include(":cat")
 include(":cat:domain")
