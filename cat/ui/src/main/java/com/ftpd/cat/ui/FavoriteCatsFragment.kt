@@ -1,11 +1,9 @@
 package com.ftpd.cat.ui
 
-import android.content.res.Resources
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageButton
 import android.widget.LinearLayout
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -14,13 +12,13 @@ import androidx.recyclerview.widget.RecyclerView
 import com.ftpd.base.Cat
 import com.ftpd.base.DataState
 import com.ftpd.cat.domain.GetCatsObject
+import com.ftpd.cat.domain.GetFavoriteCatsObject
 import com.ftpd.weldy.navigator.DestinationFragment
 import com.ftpd.weldy.navigator.NavigationHelper
 import dagger.hilt.android.AndroidEntryPoint
-import kotlin.math.ceil
 
 @AndroidEntryPoint
-class CatsFragment : Fragment() {
+class FavoriteCatsFragment : Fragment() {
 
     private val catsViewModel: CatsViewModel by viewModels()
     private lateinit var rootView: LinearLayout
@@ -30,7 +28,7 @@ class CatsFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        catsViewModel.getCatList(GetCatsObject.GetPostsObjectRequest(limit = CatConstants.LIST_LIMIT, page = CatConstants.page))
+        catsViewModel.getFavoriteCatList()
 
     }
 
@@ -42,16 +40,6 @@ class CatsFragment : Fragment() {
         rootView = LinearLayout(requireContext())
         rootView.layoutDirection = View.LAYOUT_DIRECTION_LTR
         rootView.orientation = LinearLayout.VERTICAL
-        val favoriteButton = ImageButton(requireContext())
-        favoriteButton.setImageResource(android.R.drawable.btn_star_big_on)
-        rootView.addView(favoriteButton,50.dp(),50.dp())
-        favoriteButton.setOnClickListener {
-            NavigationHelper.navigateToDestination(
-                DestinationFragment.FAVORITE_CATS_FRAGMENT,
-                replace = true,
-                addToBackStack = true,
-            )
-        }
         recyclerView = RecyclerView(requireContext())
         rootView.addView(recyclerView, -1, -1)
         recyclerView.layoutManager = GridLayoutManager(context, 3, RecyclerView.VERTICAL, false)
@@ -73,30 +61,19 @@ class CatsFragment : Fragment() {
         recyclerView.addItemDecoration(
             MarginItemDecoration(8.dp())
         )
-        recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
-            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
-                super.onScrolled(recyclerView, dx, dy)
-                    val lastVisiblePosition =
-                        (recyclerView.layoutManager as GridLayoutManager?)!!.findLastVisibleItemPosition()
-                    if (lastVisiblePosition >= 5) {
-                        catsViewModel.getCatList(GetCatsObject.GetPostsObjectRequest(limit = CatConstants.LIST_LIMIT, page = CatConstants.page++))
-                    }
 
-
-            }
-        })
 
         return rootView
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        catsViewModel.catsLiveData.observe(
+        catsViewModel.favoriteCatsLiveData.observe(
             viewLifecycleOwner
         ) {
             when (it) {
                 is DataState.Data -> {
-                    val response = it.data as GetCatsObject.GetPostsObjectResponse
+                    val response = it.data as GetFavoriteCatsObject.GetFavoriteCatsObjectResponse
                     placesList += response.cats
                     catsAdapter.submitList(placesList)
                 }
@@ -108,10 +85,4 @@ class CatsFragment : Fragment() {
         }
     }
 
-}
-
-fun Int.dp(): Int {
-    return if (this == 0) {
-        0
-    } else ceil((Resources.getSystem().displayMetrics.density * this).toDouble()).toInt()
 }

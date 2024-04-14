@@ -53,6 +53,7 @@ dependencies {
     implementation(Hilt.android)
     kapt(Hilt.compiler)
     implementation(project(":base"))
+    implementation(project(":navigator"))
     implementation(project(":cat:domain"))
     implementation(project(":cat:framework"))
     implementation(project(":cat:usecase"))

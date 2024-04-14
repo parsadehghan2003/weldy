@@ -11,5 +11,4 @@ interface CatDataStorage {
     ): RealmList<RealmFavoriteCat>?
 
     suspend fun readFavoriteCats(realm: TypedRealm? = null): RealmList<RealmFavoriteCat>?
-//    suspend fun deleteAllPosts(realm: TypedRealm? = null)
 }

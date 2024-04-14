@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.ftpd.base.Cat
 
-class CatsAdapter : ListAdapter<Cat, CatsAdapter.ViewHolder>(
+class CatsAdapter(val catsAdapterEventListener: CatsAdapterEventListener) : ListAdapter<Cat, CatsAdapter.ViewHolder>(
     AsyncDifferConfig.Builder(PostsDiffUtil()).build()
 ) {
 
@@ -48,14 +48,19 @@ class CatsAdapter : ListAdapter<Cat, CatsAdapter.ViewHolder>(
 
     }
 
-    class ViewHolder(private val view: View) : RecyclerView.ViewHolder(view) {
+    inner class ViewHolder(private val view: View) : RecyclerView.ViewHolder(view) {
         private val imageView: AppCompatImageView = view.findViewById(R.id.imageView)
 
         fun bindPostCell(cat: Cat) {
             Glide.with(view.context).load(cat.url).centerCrop().into(imageView)
-
+            imageView.setOnClickListener {
+                catsAdapterEventListener.onItemClickListener(cat)
+            }
         }
     }
 
 
+}
+interface CatsAdapterEventListener {
+    fun onItemClickListener(cat: Cat)
 }

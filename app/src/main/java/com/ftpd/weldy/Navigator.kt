@@ -5,7 +5,9 @@ import androidx.annotation.IdRes
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Lifecycle
+import com.ftpd.cat.ui.CatFragment
 import com.ftpd.cat.ui.CatsFragment
+import com.ftpd.cat.ui.FavoriteCatsFragment
 import com.ftpd.weldy.navigator.DestinationFragment
 import com.ftpd.weldy.navigator.NavigationModel
 import java.io.Serializable
@@ -69,6 +71,8 @@ object Navigator {
     private fun findDestinationFragment(destinationFragment: DestinationFragment): Fragment {
         return when (destinationFragment) {
             DestinationFragment.CATS_FRAGMENT -> CatsFragment()
+            DestinationFragment.CAT_FRAGMENT -> CatFragment()
+            DestinationFragment.FAVORITE_CATS_FRAGMENT -> FavoriteCatsFragment()
         }
     }
 }

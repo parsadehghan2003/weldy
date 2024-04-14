@@ -1,3 +1,10 @@
 package com.ftpd.base
 
-data class Cat(val id: String, val url: String, val width: Int, val height: Int)
+import java.io.Serializable
+
+data class Cat(
+    var id: String = "",
+    var url: String = "",
+    var width: Int = 0,
+    var height: Int = 0
+) : Serializable
