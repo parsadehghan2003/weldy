@@ -15,7 +15,7 @@ sealed class GetCatsObject : BaseDomain {
     }
 
     open class GetPostsObjectResponse(
-        val posts: List<Cat>,
+        val cats: List<Cat>,
     ) : GetCatsObject() {
         override val actionType: ActionType
             get() = ActionType.GET_CATS_RESPONSE

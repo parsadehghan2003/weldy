@@ -39,5 +39,13 @@ object NetworkModule {
 
     @Provides
     @Singleton
-    fun providesOkHttpClient(): OkHttpClient = OkHttpClient.Builder().build()
+    fun providesOkHttpClient(): OkHttpClient {
+        return OkHttpClient.Builder().addInterceptor { chain ->
+            chain.proceed(
+                chain.request().newBuilder()
+                    .addHeader("x-api-key", "WELDY").build()
+            )
+        }
+            .build()
+    }
 }

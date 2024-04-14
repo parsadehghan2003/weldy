@@ -18,6 +18,8 @@ include(":app")
 include(":base")
 //database
 include(":database")
+//navigator
+include(":navigator")
 //gateway
 include(":gateway")
 //cat feature
@@ -26,4 +28,4 @@ include(":cat:domain")
 include(":cat:data-source")
 include(":cat:framework")
 include(":cat:ui")
-include(":cat:interactor")
+include(":cat:usecase")

@@ -38,6 +38,14 @@ dependencies {
 
     implementation(AndroidX.coreKtx)
     implementation(AndroidX.appCompat)
+    implementation(AndroidX.fragment)
+    implementation(AndroidX.lifecycle_runtime_ktx)
+    implementation(AndroidX.lifecycle_viewmodel)
+    implementation(AndroidX.lifecycle_extenteions)
+    kapt (AndroidX.lifecycle_extenteions_compiler)
+    implementation(Glide.glide)
+    implementation(Glide.glideCompiler)
+    implementation(Glide.glideOkhttp3)
     implementation(Google.material)
     testImplementation(JUnit.jUnit)
     androidTestImplementation(AndroidXTest.jUnitInstrumentTest)
@@ -45,4 +53,10 @@ dependencies {
     implementation(Hilt.android)
     kapt(Hilt.compiler)
     implementation(project(":base"))
+    implementation(project(":cat:domain"))
+    implementation(project(":cat:framework"))
+    implementation(project(":cat:usecase"))
+    implementation(project(":cat:data-source"))
+    implementation(project(":gateway"))
+
 }
